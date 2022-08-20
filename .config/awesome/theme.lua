@@ -1,1 +1,1 @@
-theme.lua##hostname.daniellaptop
+theme.lua##hostname.danielpc
