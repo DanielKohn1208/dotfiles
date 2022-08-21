@@ -12,10 +12,10 @@ configuration {
 @theme "/dev/null"
 
 * {
-  bg: #D8DEE9;
-  bg-alt: #ECEFF4; 
-  fg: #5E81AC;
-  fg-alt: #434C5E;
+  bg: #EFF1F5;
+  bg-alt: #E6E9EF; 
+  fg-alt: #4C4F69;
+  fg: #8839EF;
 
   window-border-color: #8FBCBB;
   
@@ -34,6 +34,7 @@ element {
 
 element selected {
   text-color: @fg;
+
 }
 
 element-text {
