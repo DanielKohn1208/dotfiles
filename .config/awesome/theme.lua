@@ -13,14 +13,14 @@ local theme = {}
 
 theme.font          = "JetBrainsMono Medium Nerd Font 14"
 
-theme.bg_normal     = "#535d6c"
-theme.bg_focus      = "#535d6c"
+theme.bg_normal     = "#181926"
+theme.bg_focus      = "#24273A"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
-theme.bg_systray    = theme.bg_normal
+theme.bg_systray    = "#8BD5CA"
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
+theme.fg_normal     = "#A5ADCB"
+theme.fg_focus      = "#CAD3F5"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
