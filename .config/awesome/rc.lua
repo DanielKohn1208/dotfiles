@@ -352,7 +352,7 @@ globalkeys = gears.table.join(
 	end, { description = "show the menubar", group = "launcher" }),
 
 	awful.key({ modkey }, "w", function()
-		awful.util.spawn("qutebrowser")
+		awful.util.spawn("firefox")
 	end, { description = "show the menubar", group = "launcher" }),
 
 	awful.key({ }, "XF86AudioLowerVolume", function()

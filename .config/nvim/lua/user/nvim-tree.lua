@@ -14,8 +14,23 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup({
 
-	renderer= {
-		icons ={
+	renderer = {
+		indent_markers = {
+			enable = true,
+
+			inline_arrows = false,
+			icons = {
+				corner = "└",
+				edge = "│",
+				item = "│",
+				bottom = "─",
+				none = " ",
+			},
+		},
+		icons = {
+			show = {
+				folder_arrow = false,
+			},
 			glyphs = {
 				default = "",
 				symlink = "",
@@ -37,7 +52,6 @@ nvim_tree.setup({
 				},
 			},
 		},
-
 	},
 	disable_netrw = true,
 	hijack_netrw = true,
