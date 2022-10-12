@@ -8,9 +8,12 @@
 
 
 from typing import List  # noqa: F401
-from libqtile import bar, layout, widget
+
+from libqtile import bar, layout 
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Rule, Screen
 from libqtile.lazy import lazy
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration
 from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
 from unicodes import right_arrow, left_arrow, lower_left_triangle, left_half_circle, right_half_circle
@@ -22,7 +25,36 @@ from libqtile import hook
 mod = "mod4"
 terminal = "alacritty"
 webbrowser = "qutebrowser"
+catppuccin = {
+    "rosewater" : "#F4DBD6",
+	"lamingo" : "#F0C6C6",
+	'pink' : "#F5BDE6",
+	'mauve' : "#C6A0F6",
+	'red' : "#ED8796",
+	'maroon' : "#EE99A0",
+	'peach' : "#F5A97F",
+	'yellow' : "#EED49F",
+	'green' : "#A6DA95",
+	'teal' : "#8BD5CA",
+	'sky' : "#91D7E3",
+	'sapphire' : "#7DC4E4",
+	'blue' : "#8AADF4",
+	'lavender' : "#B7BDF8",
 
+	'text' : "#CAD3F5",
+	'subtext1' : "#B8C0E0",
+	'subtext0' : "#A5ADCB",
+	'overlay2' : "#939AB7",
+	'overlay1' : "#8087A2",
+	'overlay0' : "#6E738D",
+	'surface2' : "#5B6078",
+	'surface1' : "#494D64",
+	'surface0' : "#363A4F",
+
+	'base' : "#24273A",
+	'mantle' : "#1E2030",
+	'crust' : "#181926",
+}
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -93,7 +125,7 @@ groups=[
     Group("ﭮ",matches=[Match(wm_class=["discord"])]),
     Group("",matches=[Match(wm_class=["obsidian"])]),
     Group("",matches=[Match(wm_class=["spotify"])]),
-    Group("",matches=[Match(wm_class=[])]),
+    Group(" ",matches=[Match(wm_class=[])]),
 ]
 
 for k, group in zip(["1","2","3","4","5","6"], groups):
@@ -140,8 +172,8 @@ layouts = [
     #     border_on_single=True,
     # ),
     layout.MonadTall(
-        border_focus="#D08770",
-        border_normal="#5E81AC",
+        border_focus=catppuccin["mauve"],
+        border_normal=catppuccin["base"],
         border_width=3,
         margin=10,
         border_on_single=True,
@@ -152,7 +184,7 @@ layouts = [
     #     border_width=3,
     # ),
 ]
-
+#
 nord = {
     "nord0": "#2E3440",  # dark colors
     "nord1": "#3B4252",
@@ -172,88 +204,73 @@ nord = {
     "nord15": "#B48EAD",
 }
 
+
 widget_defaults = dict(
     font="JetBrainsMono Medium Nerd Font ",
     fontsize=16,
     padding=5,
-    background=nord["nord1"],
-    foreground=nord["nord4"],
 )
 extension_defaults = widget_defaults.copy()
-
 
 screens = [
     Screen(
         top=bar.Bar(
             [
                 widget.GroupBox(
-                    inactive="5E81AC",
-                    active="#ECEFF4",
-                    highlight_method="line",
-                    disable_drag=True,
-                    highlight_color=["#4c566a"],
+                    inactive=catppuccin["overlay1"],
+                    active=catppuccin["rosewater"],
+                    highlight_method="text",
+                    highlight_color=catppuccin["rosewater"],
                     padding_x=13,
-                    this_current_screen_border="#88C0D0",
+                    this_current_screen_border=catppuccin["peach"],
+                    background=catppuccin["surface0"]
                 ),
 
-                widget.WindowName(max_chars=50, foreground=nord["nord13"], fmt="     {}"),
-                left_half_circle(nord["nord10"]),
+                widget.WindowName(max_chars=50, foreground=catppuccin['peach'], fmt="     {}"),
+
                 widget.PulseVolume(
                     fmt="奔{}",
-                    background=nord["nord10"],
                     mouse_callbacks={
                         "Button1": lazy.spawn("pavucontrol"),
                     },
+                    foreground=catppuccin["blue"],
                 ),
-                right_half_circle(nord["nord10"]),
-
-                widget.Spacer(length=10),
-                left_half_circle(nord["nord10"]),
+                widget.TextBox(fmt="|",padding=None,foreground=catppuccin["blue"]),
                 widget.KeyboardLayout(
-                    configured_keyboards=["us", "ca"], fmt=" {}", background=nord["nord10"]
+                    configured_keyboards=["us", "ca"], fmt=" {}", 
+                    foreground=catppuccin["blue"],
+
                 ),
-                right_half_circle(nord["nord10"]),
-                widget.Spacer(length=10),
-                left_half_circle(nord["nord10"]),
+                widget.Spacer(length=30),
                 widget.CPU(
+                    foreground=catppuccin["green"],
                     format=" {load_percent}%",
-                    background=nord["nord10"],
                     mouse_callbacks={
                         "Button1": lazy.spawn("alacritty --class htop -e htop"),
                     },
                 ),
-                right_half_circle(nord["nord10"]),
-                widget.Spacer(length=10),
-                left_half_circle(nord["nord10"]),
+                widget.TextBox(fmt="|",padding=None,foreground=catppuccin["green"]),
                 widget.Memory(
+
+                    foreground=catppuccin["green"],
                     fmt="{}",
-                    background=nord["nord10"],
                     mouse_callbacks={
                         "Button1": lazy.spawn("alacritty --class htop -e htop"),
                     },
                 ),
-                right_half_circle(nord["nord10"]),
-                widget.Spacer(length=10),
-                left_half_circle(nord["nord10"]),
-                widget.Clock(format=" %Y-%m-%d %a %I:%M %p",
-                             background=nord["nord10"]),
-                right_half_circle(nord["nord10"]),
-                widget.Spacer(length=10),
-                left_half_circle(nord["nord14"]),
-                widget.Systray(background=nord["nord14"]),
-                widget.TextBox(background=nord["nord14"], fmt=' '),
+                widget.Spacer(length=30),
+                widget.Clock(format=" %Y-%m-%d %a %I:%M %p", foreground=catppuccin["rosewater"]),
+                widget.Spacer(length=15),
+                widget.Spacer(length=15, background=catppuccin["surface0"]),
+                widget.Systray(background=catppuccin["surface0"]),
+                widget.Spacer(length=30,background=catppuccin["surface0"]),
             ],
-            size=30,
-            border_color=[
-                "ff00ff",
-                "000000",
-                "ff00ff",
-                "000000",
-            ],  # Borders are magenta
+            size=40,
+            background=catppuccin["base"],
+            opacity=1,
         ),
     ),
 ]
-
 
 # Drag floating layouts.
 mouse = [
@@ -291,8 +308,8 @@ floating_layout = layout.Floating(
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
-    border_focus="#D08770",
-    border_normal="#5E81AC",
+    border_focus=catppuccin["mauve"],
+    border_normal=catppuccin["crust"],
     border_width=3,
 )
 auto_fullscreen = True
@@ -318,3 +335,6 @@ wmname = "LG3D"
 def autostart():
     home = os.path.expanduser("~/.config/qtile/autostart.sh")
     subprocess.run([home])
+@hook.subscribe.restart
+def restart():
+    lazy.hide_show_bar("top")
