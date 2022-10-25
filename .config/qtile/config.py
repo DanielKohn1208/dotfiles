@@ -206,7 +206,7 @@ nord = {
 
 
 widget_defaults = dict(
-    font="JetBrainsMono Medium Nerd Font ",
+    font="JetBrainsMono Nerd Font Medium ",
     fontsize=16,
     padding=5,
 )
@@ -222,6 +222,7 @@ screens = [
                     highlight_method="text",
                     highlight_color=catppuccin["rosewater"],
                     padding_x=13,
+                    fontsize=23,
                     this_current_screen_border=catppuccin["peach"],
                     background=catppuccin["surface0"]
                 ),
