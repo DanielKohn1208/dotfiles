@@ -33,14 +33,16 @@ return require('packer').startup({ function(use)
 	use 'wbthomason/packer.nvim'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'kyazdani42/nvim-tree.lua'
+
+
 	use {
 		"catppuccin/nvim",
 		as = "catppuccin",
-		config = function()
-			vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-			require("catppuccin").setup()
-		end
 	}
+
+
+    use "lukas-reineke/indent-blankline.nvim"
+
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
@@ -66,12 +68,26 @@ return require('packer').startup({ function(use)
 	use 'nvim-lua/plenary.nvim'
 	use 'BurntSushi/ripgrep'
 
-	use {'akinsho/bufferline.nvim', tag = "v2.*"}
+	-- bufferline
+	use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' }
+
+	-- status line
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
+
 	-- handles autopairs
 	use {
 		"windwp/nvim-autopairs",
 		config = function() require("nvim-autopairs").setup {} end
 	}
+
+	-- toggle term
+	use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+		require("toggleterm").setup()
+	end }
+
 	--handles Comments
 	use {
 		'numToStr/Comment.nvim',

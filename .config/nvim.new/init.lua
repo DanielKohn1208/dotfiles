@@ -9,6 +9,7 @@ require("lsp.mason")
 require("user.autopairs")
 require("user.comment")
 require("user.telescope")
+vim.api.nvim_command "colorscheme catppuccin-macchiato"
 require("user.bufferline")
-vim.api.nvim_command "colorscheme catppuccin"
-
+require("user.lualine")
+require("user.toggleterm")
