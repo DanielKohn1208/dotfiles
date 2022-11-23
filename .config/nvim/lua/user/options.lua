@@ -4,8 +4,8 @@ vim.opt.cmdheight = 2                           -- more space in the neovim comm
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
-vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
-vim.opt.ignorecase = true                       -- ignore case in search patterns
+vim.opt.hlsearch = false						-- highlight all matches on previous search pattern
+vim.opt.ignorecase = true                       -- ignore case in search pattern
 vim.opt.mouse = "a"                             -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10                          -- pop up menu height
 vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymore
@@ -13,8 +13,6 @@ vim.opt.showtabline = 2                         -- always show tabs
 vim.opt.smartcase = true                        -- smart case
 vim.opt.smartindent = true                      -- make indenting smarter again
 vim.opt.splitbelow = true                       -- force all horizontal splits to go below current window
-vim.opt.list = true								-- used to show special character for end of line
-vim.opt.listchars:append("eol:↴")				-- append to end of line
 
 vim.opt.splitright = true                       -- force all vertical splits to go to the right of current window
 vim.opt.swapfile = false                        -- creates a swapfile
