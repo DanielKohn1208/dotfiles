@@ -206,7 +206,7 @@ nord = {
 
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Medium ",
+    font="JetBrainsMono Nerd Font Medium",
     fontsize=16,
     padding=5,
 )
