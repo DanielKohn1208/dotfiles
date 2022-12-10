@@ -90,3 +90,31 @@ require('lspconfig')['sumneko_lua'].setup {
 	},
 
 }
+require('lspconfig')['cssls'].setup {
+	on_attach = on_attach,
+
+}
+require('lspconfig')['jdtls'].setup {
+	on_attach = on_attach,
+
+}
+require('lspconfig')['html'].setup {
+	on_attach = on_attach,
+
+}
+require('lspconfig')['tsserver'].setup {
+	on_attach = on_attach,
+	root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
+
+}
+
+require('lspconfig')['pyright'].setup {
+	on_attach = on_attach,
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "off",
+			}
+		}
+	},
+}
