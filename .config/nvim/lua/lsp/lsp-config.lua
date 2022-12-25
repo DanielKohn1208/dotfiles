@@ -109,7 +109,9 @@ require("lspconfig")["tsserver"].setup({
 	on_attach = on_attach,
 	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
 })
-
+-- require'lspconfig'.jedi_language_server.setup({
+-- 	on_attach = on_attach,
+-- })
 require("lspconfig")["pyright"].setup({
 	on_attach = on_attach,
 	settings = {
@@ -122,3 +124,5 @@ require("lspconfig")["pyright"].setup({
 		},
 	},
 })
+
+

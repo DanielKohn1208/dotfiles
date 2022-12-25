@@ -4,6 +4,6 @@ require("mason").setup({
 	}
 })
 require("mason-lspconfig").setup({
-	ensure_installed = { "sumneko_lua", "cssls", "html", "jdtls", "pyright", "tsserver","marksman" },
+	ensure_installed = { "sumneko_lua","pyright", "cssls", "html", "jdtls", "tsserver","marksman" },
 	automatic_installation = true,
 })
