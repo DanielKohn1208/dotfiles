@@ -100,6 +100,11 @@ return require("packer").startup({
 		use({
 			"lewis6991/gitsigns.nvim",
 		})
+		use({
+			"kosayoda/nvim-lightbulb",
+			requires = "antoinemadec/FixCursorHold.nvim",
+		})
+
 		-- setup config after cloning packer
 		if packer_bootstrap then
 			require("packer").sync()

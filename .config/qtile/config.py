@@ -23,7 +23,7 @@ import subprocess
 from libqtile import hook
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "kitty -1"
 webbrowser = "qutebrowser"
 catppuccin = {
     "rosewater" : "#F4DBD6",
@@ -122,8 +122,8 @@ keys = [
 groups=[
     Group("爵",matches=[Match(wm_class=[])]),
     Group("", matches=[Match(wm_class=["dev"])]),
-    Group("ﭮ",matches=[Match(wm_class=["discord"])]),
-    Group("",matches=[Match(wm_class=["obsidian"])]),
+    Group("",matches=[Match(wm_class=["discord"])]),
+    Group("",matches=[Match(wm_class=["obsidian", "signin-googleaccounts-nativefier-e89b69"])]),
     Group("",matches=[Match(wm_class=["spotify"])]),
     Group(" ",matches=[Match(wm_class=[])]),
 ]

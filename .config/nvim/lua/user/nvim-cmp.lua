@@ -8,7 +8,6 @@ end
 
 require("luasnip.loaders.from_vscode").lazy_load() -- loading snippets from vs code
 
-
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -16,12 +15,13 @@ cmp.setup({
 		end,
 	},
 	window = {
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
 		fields = { "abbr", "menu" },
 		format = function(entry, vim_item)
+			vim_item.kind = "uwu"
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[LUA]",

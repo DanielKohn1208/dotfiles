@@ -13,9 +13,11 @@ null_ls.setup({
 	sources = {
 		-- formatting.black.with({ extra_args = { "--fast" } }),
 		-- formatting.yapf,
-		formatting.autopep8,
+		formatting.autopep8.with({extra_args= {"-a", "-a" }}),
 		formatting.stylua,
 		diagnostics.flake8.with({ extra_args = { "--max-line-line-length", "100" } }),
 		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
+		null_ls.builtins.code_actions.proselint,
+		diagnostics.proselint,
 	},
 })

@@ -22,7 +22,7 @@ local config = {
 	underline = false,
 	severity_sort = true,
 	float = {
-		focusable = false,
+		focusable = true,
 		style = "minimal",
 		border = "rounded",
 		source = "always",
@@ -94,17 +94,20 @@ require('lspconfig')['cssls'].setup {
 	on_attach = on_attach,
 
 }
-require('lspconfig')['jdtls'].setup {
+require('lspconfig')['marksman'].setup {
 	on_attach = on_attach,
-
 }
+
+require('lspconfig').jdtls.setup{
+	on_attach = on_attach,
+}
+
 require('lspconfig')['html'].setup {
 	on_attach = on_attach,
-
 }
 require('lspconfig')['tsserver'].setup {
 	on_attach = on_attach,
-	root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
+	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
 
 }
 
@@ -113,7 +116,9 @@ require('lspconfig')['pyright'].setup {
 	settings = {
 		python = {
 			analysis = {
+				autoSearchPaths = true, 
 				typeCheckingMode = "off",
+				useLibraryCodeForTypes = true,
 			}
 		}
 	},
