@@ -25,6 +25,16 @@ vim.cmd([[packadd packer.nvim]])
 -- Install plugins here
 return require("packer").startup({
 	function(use)
+		use("fcpg/vim-waikiki")
+		use({
+			"iamcco/markdown-preview.nvim",
+			run = "cd app && npm install",
+			setup = function()
+				vim.g.mkdp_filetypes = { "markdown" }
+			end,
+			ft = { "markdown" },
+		})
+		use("jbyuki/nabla.nvim")
 		-- Packer can manage itself
 		use("wbthomason/packer.nvim")
 		use("kyazdani42/nvim-web-devicons")
@@ -100,11 +110,6 @@ return require("packer").startup({
 		use({
 			"lewis6991/gitsigns.nvim",
 		})
-		use({
-			"kosayoda/nvim-lightbulb",
-			requires = "antoinemadec/FixCursorHold.nvim",
-		})
-
 		-- setup config after cloning packer
 		if packer_bootstrap then
 			require("packer").sync()

@@ -65,7 +65,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references{}<cr>", bufopts)
 	vim.keymap.set("n", "<space>f", function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({async = true} )
 	end, bufopts)
 end
 
@@ -94,9 +94,6 @@ require("lspconfig")["sumneko_lua"].setup({
 require("lspconfig")["cssls"].setup({
 	on_attach = on_attach,
 })
-require("lspconfig")["marksman"].setup({
-	on_attach = on_attach,
-})
 
 require("lspconfig").jdtls.setup({
 	on_attach = on_attach,
@@ -109,6 +106,11 @@ require("lspconfig")["tsserver"].setup({
 	on_attach = on_attach,
 	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
 })
+require("lspconfig")["emmet_ls"].setup({
+	on_attach = on_attach,
+	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
+})
+
 -- require'lspconfig'.jedi_language_server.setup({
 -- 	on_attach = on_attach,
 -- })
@@ -124,5 +126,3 @@ require("lspconfig")["pyright"].setup({
 		},
 	},
 })
-
-

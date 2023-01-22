@@ -15,14 +15,16 @@ settings:
         K: forward
         L: tab-next
         M: hint links spawn --detach vlc {hint-url}
+  colors.webpage.darkmode.enabled:
+    global: false
   colors.webpage.preferred_color_scheme:
     global: dark
   content.autoplay:
     global: true
   content.blocking.method:
     global: both
-  content.javascript.can_access_clipboard:
-    github.com: true
+  content.javascript.clipboard:
+    github.com: access
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: true

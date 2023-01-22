@@ -21,7 +21,6 @@ cmp.setup({
 	formatting = {
 		fields = { "abbr", "menu" },
 		format = function(entry, vim_item)
-			vim_item.kind = "uwu"
 			vim_item.menu = ({
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[LUA]",

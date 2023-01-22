@@ -14,10 +14,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 export ZSH="/home/daniel/.oh-my-zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
-
-
-
-
+export TERM=xterm-256color
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
