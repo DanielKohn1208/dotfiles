@@ -8,6 +8,8 @@ local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
+local source = { }
+
 null_ls.setup({
 	debug = false,
 	sources = {
@@ -17,7 +19,10 @@ null_ls.setup({
 		formatting.stylua,
 		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),
 		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
-		formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}}),
 	},
 })
 
+
+-- local djlint_source = {formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}})}
+-- djlint_source.filetype = {"jinja.html", "htmldjango"}
+-- null_ls.register{{djlint_source}}
