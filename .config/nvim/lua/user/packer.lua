@@ -25,6 +25,7 @@ vim.cmd([[packadd packer.nvim]])
 -- Install plugins here
 return require("packer").startup({
 	function(use)
+		use("WhoIsSethDaniel/mason-tool-installer.nvim")
 		use({
 			"iamcco/markdown-preview.nvim",
 			run = "cd app && npm install",

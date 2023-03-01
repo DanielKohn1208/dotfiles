@@ -19,6 +19,7 @@ null_ls.setup({
 		formatting.autopep8.with({extra_args= {"-a"}}),
 		formatting.stylua,
 		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),
+		formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}}),
 		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
 	},
 	border = "rounded",
@@ -26,6 +27,3 @@ null_ls.setup({
 })
 
 
--- local djlint_source = {formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}})}
--- djlint_source.filetype = {"jinja.html", "htmldjango"}
--- null_ls.register{{djlint_source}}
