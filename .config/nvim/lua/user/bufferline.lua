@@ -2,6 +2,7 @@ local status_ok, bufferline = pcall(require, "bufferline")
 if not status_ok then
 	return
 end
+local macchiato = require("catppuccin.palettes").get_palette("macchiato")
 
 bufferline.setup({
 	options = {
@@ -20,6 +21,15 @@ bufferline.setup({
 		-- close_icon = '',
 		left_trunc_marker = "",
 		right_trunc_marker = "",
+		-- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+		--   local s = " "
+		--   for e, n in pairs(diagnostics_dict) do
+		-- 	local sym = e == "error" and " "
+		-- 	  or (e == "warning" and " " or "" )
+		-- 	s = s .. sym
+		--   end
+		--   return s
+		-- end,
 		--- name_formatter can be used to change the buffer's label in the bufferline.
 		--- Please note some names can/will break the
 		--- bufferline so use this at your discretion knowing that it has
@@ -35,9 +45,14 @@ bufferline.setup({
 		tab_size = 21,
 		diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
 		diagnostics_update_in_insert = false,
-		-- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-		--   return "("..count..")"
-		-- end,
+		diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			local s = " "
+			for e, n in pairs(diagnostics_dict) do
+				local sym = e == "error" and " " or (e == "warning" and " " or "")
+				s = s .. n .. sym
+			end
+			return s
+		end,
 		-- NOTE: this will be called a lot so don't do any heavy processing here
 		-- custom_filter = function(buf_number)
 		--   -- filter out filetypes you don't want to see
@@ -68,6 +83,21 @@ bufferline.setup({
 		-- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
 		--   -- add custom logic
 		--   return buffer_a.modified > buffer_b.modified
-		highlights = require("catppuccin.groups.integrations.bufferline").get()
+		highlights = require("catppuccin.groups.integrations.bufferline").get({
+			styles = { "italic", "bold" },
+			custom = {
+				all = {
+					diagnostic = {
+						fg = "#fffffff",
+					},
+					diagnostic_visible = {
+						fg = macchiato.red,
+					},
+					diagnostic_selected = {
+						fg = macchiato.red,
+					},
+				},
+			},
+		}),
 	},
 })

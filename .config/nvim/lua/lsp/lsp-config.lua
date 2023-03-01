@@ -1,3 +1,4 @@
+local M = {}
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
@@ -43,10 +44,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
+M.on_attach = function(client,bufnr)
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -74,8 +72,8 @@ local lsp_flags = {
 	debounce_text_changes = 150,
 }
 
-require("lspconfig")["sumneko_lua"].setup({
-	on_attach = on_attach,
+require("lspconfig")["lua_ls"].setup({
+	on_attach = M.on_attach,
 	flags = lsp_flags,
 	settings = {
 		Lua = {
@@ -92,22 +90,22 @@ require("lspconfig")["sumneko_lua"].setup({
 	},
 })
 require("lspconfig")["cssls"].setup({
-	on_attach = on_attach,
+	on_attach = M.on_attach,
 })
 
 require("lspconfig").jdtls.setup({
-	on_attach = on_attach,
+	on_attach = M.on_attach,
 })
 
 require("lspconfig")["html"].setup({
-	on_attach = on_attach,
+	on_attach = M.on_attach,
 })
 require("lspconfig")["tsserver"].setup({
-	on_attach = on_attach,
+	on_attach = M.on_attach,
 	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
 })
 require("lspconfig")["emmet_ls"].setup({
-	on_attach = on_attach,
+	on_attach = M.on_attach,
 	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
 })
 
@@ -115,7 +113,7 @@ require("lspconfig")["emmet_ls"].setup({
 -- 	on_attach = on_attach,
 -- })
 require("lspconfig")["pyright"].setup({
-	on_attach = on_attach,
+	on_attach = M.on_attach,
 	settings = {
 		python = {
 			analysis = {
@@ -126,3 +124,5 @@ require("lspconfig")["pyright"].setup({
 		},
 	},
 })
+
+return M
