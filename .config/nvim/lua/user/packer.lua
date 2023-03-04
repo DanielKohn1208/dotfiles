@@ -25,7 +25,9 @@ vim.cmd([[packadd packer.nvim]])
 -- Install plugins here
 return require("packer").startup({
 	function(use)
+		use "sbdchd/vim-run"
 		use("WhoIsSethDaniel/mason-tool-installer.nvim")
+		use("mfussenegger/nvim-jdtls")
 		use({
 			"iamcco/markdown-preview.nvim",
 			run = "cd app && npm install",
@@ -67,7 +69,13 @@ return require("packer").startup({
 		use("hrsh7th/cmp-path")
 		use("hrsh7th/cmp-cmdline")
 		use("hrsh7th/nvim-cmp")
-		use("L3MON4D3/LuaSnip")
+		use({
+			"L3MON4D3/LuaSnip",
+			-- follow latest release.
+			tag = "v<CurrentMajor>.*",
+			-- install jsregexp (optional!:).
+			run = "make install_jsregexp",
+		})
 		use("saadparwaiz1/cmp_luasnip")
 		use("hrsh7th/cmp-nvim-lua")
 		use("rafamadriz/friendly-snippets") -- a bunch of snippets to use

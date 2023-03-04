@@ -92,10 +92,10 @@ require("lspconfig")["lua_ls"].setup({
 require("lspconfig")["cssls"].setup({
 	on_attach = M.on_attach,
 })
-
-require("lspconfig").jdtls.setup({
-	on_attach = M.on_attach,
-})
+--
+-- require("lspconfig").jdtls.setup({
+-- 	on_attach = M.on_attach,
+-- })
 
 require("lspconfig")["html"].setup({
 	on_attach = M.on_attach,
