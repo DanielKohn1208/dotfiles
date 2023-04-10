@@ -14,8 +14,6 @@ local source = { }
 null_ls.setup({
 	debug = false,
 	sources = {
-		-- formatting.black.with({ extra_args = { "--fast" } }),
-		-- formatting.yapf,
 		formatting.autopep8.with({extra_args= {"-a"}}),
 		formatting.stylua,
 		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),

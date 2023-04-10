@@ -6,12 +6,13 @@ vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
-
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+
 local config = {
 	-- disable virtual text
 	virtual_text = false,
@@ -92,11 +93,6 @@ require("lspconfig")["lua_ls"].setup({
 require("lspconfig")["cssls"].setup({
 	on_attach = M.on_attach,
 })
---
--- require("lspconfig").jdtls.setup({
--- 	on_attach = M.on_attach,
--- })
-
 require("lspconfig")["html"].setup({
 	on_attach = M.on_attach,
 })
@@ -106,12 +102,8 @@ require("lspconfig")["tsserver"].setup({
 })
 require("lspconfig")["emmet_ls"].setup({
 	on_attach = M.on_attach,
-	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
 })
 
--- require'lspconfig'.jedi_language_server.setup({
--- 	on_attach = on_attach,
--- })
 require("lspconfig")["pyright"].setup({
 	on_attach = M.on_attach,
 	settings = {

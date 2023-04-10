@@ -25,17 +25,9 @@ vim.cmd([[packadd packer.nvim]])
 -- Install plugins here
 return require("packer").startup({
 	function(use)
-		use "sbdchd/vim-run"
+		use("onsails/lspkind.nvim")
 		use("WhoIsSethDaniel/mason-tool-installer.nvim")
 		use("mfussenegger/nvim-jdtls")
-		use({
-			"iamcco/markdown-preview.nvim",
-			run = "cd app && npm install",
-			setup = function()
-				vim.g.mkdp_filetypes = { "markdown" }
-			end,
-			ft = { "markdown" },
-		})
 		use("jbyuki/nabla.nvim")
 		-- Packer can manage itself
 		use("wbthomason/packer.nvim")

@@ -18,8 +18,4 @@ require("user.lualine")
 require("user.toggleterm")
 require("lsp.null-ls")
 require("user.gitsigns")
-vim.cmd([[
 
-let g:waikiki_roots = ['~/vimwiki/']
-let g:waikiki_default_maps = 1
-]])
