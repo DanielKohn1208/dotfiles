@@ -3,10 +3,6 @@ require("mason").setup({
 		border = "rounded",
 	},
 })
--- require("mason-lspconfig").setup({
--- 	ensure_installed = { "sumneko_lua","pyright", "cssls", "html", "tsserver" },
--- 	automatic_installation = true,
--- })
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua-language-server",

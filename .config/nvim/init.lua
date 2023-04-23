@@ -1,6 +1,6 @@
 require("user.options")
 require("user.keymaps")
-require("user.packer")
+require("user.plugins")
 require("user.nvimtree")
 require("user.treesitter")
 require("user.nvim-cmp")
@@ -9,10 +9,6 @@ require("lsp.mason")
 require("user.autopairs")
 require("user.comment")
 require("user.telescope")
-require("catppuccin").setup({
-	transparent_background = false
-})
-vim.api.nvim_command("colorscheme catppuccin-macchiato")
 require("user.bufferline")
 require("user.lualine")
 require("user.toggleterm")
