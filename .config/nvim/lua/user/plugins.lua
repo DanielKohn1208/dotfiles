@@ -13,14 +13,12 @@ vim.opt.rtp:prepend(lazypath)
 
 
 require("lazy").setup({
-	"savq/paq-nvim", -- Let Paq manage itself
 
 	"onsails/lspkind.nvim",
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	"mfussenegger/nvim-jdtls",
 	"jbyuki/nabla.nvim",
 	-- Packer can manage itself
-	"wbthomason/packer.nvim",
 	"kyazdani42/nvim-web-devicons",
 	"kyazdani42/nvim-tree.lua",
 	{

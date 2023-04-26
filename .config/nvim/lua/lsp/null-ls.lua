@@ -13,6 +13,7 @@ null_ls.setup({
 	sources = {
 		formatting.autopep8.with({extra_args= {"-a"}}),
 		formatting.stylua,
+		formatting.google_java_format.with({extra_args = {"--aosp"}}),
 		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),
 		formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}}),
 		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
