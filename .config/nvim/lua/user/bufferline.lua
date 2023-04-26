@@ -83,21 +83,5 @@ bufferline.setup({
 		-- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
 		--   -- add custom logic
 		--   return buffer_a.modified > buffer_b.modified
-		highlights = require("catppuccin.groups.integrations.bufferline").get({
-			styles = { "italic", "bold" },
-			custom = {
-				all = {
-					diagnostic = {
-						fg = "#fffffff",
-					},
-					diagnostic_visible = {
-						fg = macchiato.red,
-					},
-					diagnostic_selected = {
-						fg = macchiato.red,
-					},
-				},
-			},
-		}),
 	},
 })

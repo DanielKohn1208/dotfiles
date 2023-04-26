@@ -1,27 +1,18 @@
--- In ~/.config/nvim/init.lua
-local function clone_paq()
-	local path = vim.fn.stdpath("data") .. "/site/pack/paqs/start/paq-nvim"
-	local is_installed = vim.fn.empty(vim.fn.glob(path)) == 0
-	if not is_installed then
-		vim.fn.system({ "git", "clone", "--depth=1", "https://github.com/savq/paq-nvim.git", path })
-		return true
-	end
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-local function bootstrap_paq(packages)
-	local first_install = clone_paq()
-	vim.cmd.packadd("paq-nvim")
-	local paq = require("paq")
-	if first_install then
-		vim.notify("Installing plugins... If prompted, hit Enter to continue.")
-	end
-	-- Read and install packages
-	paq(packages)
-	paq.install()
-end
 
--- Call helper function
-bootstrap_paq({
+require("lazy").setup({
 	"savq/paq-nvim", -- Let Paq manage itself
 
 	"onsails/lspkind.nvim",
@@ -35,6 +26,9 @@ bootstrap_paq({
 	{
 		"catppuccin/nvim",
 		as = "catppuccin",
+		config = function()
+			vim.cmd([[colorscheme catppuccin-macchiato]])
+		end
 	},
 
 	"nvim-lua/plenary.nvim",
@@ -43,7 +37,7 @@ bootstrap_paq({
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		run = function()
+		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
 	},
@@ -61,8 +55,9 @@ bootstrap_paq({
 	"hrsh7th/nvim-cmp",
 	{
 		"L3MON4D3/LuaSnip",
+		version = "1.*",
 		-- install jsregexp (optional!:).
-		run = "make install_jsregexp",
+		build = "make install_jsregexp",
 	},
 	"saadparwaiz1/cmp_luasnip",
 	"hrsh7th/cmp-nvim-lua",
@@ -73,7 +68,7 @@ bootstrap_paq({
 	"BurntSushi/ripgrep",
 
 	-- bufferline
-	{ "akinsho/bufferline.nvim", branch = "v3.0.0" },
+	{ "akinsho/bufferline.nvim", version = "3.*" },
 
 	-- status line
 	{
@@ -83,18 +78,22 @@ bootstrap_paq({
 	-- handles autopairs
 	{
 		"windwp/nvim-autopairs",
+
+		config = function ()
+			require("nvim-autopairs").setup()
+		end
 	},
 
-	"akinsho/toggleterm.nvim",
+	{ "akinsho/toggleterm.nvim", version = "*" },
 
 	--handles Comments
 	{
 		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
 	},
 
 	"lewis6991/gitsigns.nvim",
 })
--- Simple setup commands
-vim.cmd([[colorscheme catppuccin-macchiato]])
-require("Comment").setup()
-require("nvim-autopairs").setup({})
+
