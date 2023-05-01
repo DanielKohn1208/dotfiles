@@ -11,7 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 require("lazy").setup({
 
 	"onsails/lspkind.nvim",
@@ -26,7 +25,7 @@ require("lazy").setup({
 		as = "catppuccin",
 		config = function()
 			vim.cmd([[colorscheme catppuccin-macchiato]])
-		end
+		end,
 	},
 
 	"nvim-lua/plenary.nvim",
@@ -76,10 +75,9 @@ require("lazy").setup({
 	-- handles autopairs
 	{
 		"windwp/nvim-autopairs",
-
-		config = function ()
+		config = function()
 			require("nvim-autopairs").setup()
-		end
+		end,
 	},
 
 	{ "akinsho/toggleterm.nvim", version = "*" },
@@ -93,5 +91,8 @@ require("lazy").setup({
 	},
 
 	"lewis6991/gitsigns.nvim",
+}, {
+	ui = {
+		border = "rounded",
+	},
 })
-

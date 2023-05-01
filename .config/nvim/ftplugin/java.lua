@@ -3,13 +3,26 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = "/home/daniel/code/.eclipse/" .. project_name
 local config = {
 	cmd = { "jdtls", "-data", workspace_dir },
-    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw', 'build.xml'}, { upward = true})[1]),
+	root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "build.xml" }, { upward = true })[1]),
 	settings = {
 		java = {
+			configuration = {
+				runtimes = {
+
+					{
+						name = "JavaSE-17",
+						path = "~/.sdkman/candidates/java/17.0.7-tem",
+					},
+					{
+						name = "JavaSE-19",
+						path = "~/.sdkman/candidates/java/19.0.1-oracle",
+					},
+				},
+			},
 			format = {
-				enabled = false
-			}
-		}
+				enabled = false,
+			},
+		},
 	},
 	init_options = {
 		bundles = {},
