@@ -2,9 +2,9 @@
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
-plug "zap-zsh/zap-prompt"
 plug "zsh-users/zsh-syntax-highlighting"
-
+plug "MAHcodes/distro-prompt"
+plug "wintermi/zsh-lsd"
 
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -20,7 +20,6 @@ DISABLE_AUTO_TITLE="true"
 export MANPATH="/usr/local/man:$MANPATH"
 
 export BAT_THEME="Nord"
-alias ls="exa --icons"
 alias ant="ant -emacs"
 alias cat="bat"
 alias vnotes="nvim ~/notes"

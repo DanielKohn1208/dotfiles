@@ -9,11 +9,9 @@
 
 from typing import List  # noqa: F401
 
-from libqtile import bar, layout 
+from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Rule, Screen
 from libqtile.lazy import lazy
-from qtile_extras import widget
-from qtile_extras.widget.decorations import RectDecoration
 from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
 from unicodes import right_arrow, left_arrow, lower_left_triangle, left_half_circle, right_half_circle
@@ -120,9 +118,9 @@ keys = [
 
 # groups = [Group(i) for i in "123456789"]
 groups=[
-    Group("爵",matches=[Match(wm_class=[])]),
+    Group("󰖟",matches=[Match(wm_class=[])]),
     Group("", matches=[Match(wm_class=["dev"])]),
-    Group("",matches=[Match(wm_class=["discord"])]),
+    Group("󰙯",matches=[Match(wm_class=["discord"])]),
     Group("",matches=[Match(wm_class=["obsidian", "signin-googleaccounts-nativefier-e89b69"])]),
     Group("",matches=[Match(wm_class=["spotify"])]),
     Group(" ",matches=[Match(wm_class=[])]),
@@ -206,7 +204,7 @@ nord = {
 
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Medium",
+    font="JetBrainsMono NF Medium",
     fontsize=16,
     padding=5,
 )
@@ -222,7 +220,7 @@ screens = [
                     highlight_method="text",
                     highlight_color=catppuccin["rosewater"],
                     padding_x=13,
-                    fontsize=23,
+                    fontsize=16,
                     this_current_screen_border=catppuccin["peach"],
                     background=catppuccin["surface0"]
                 ),
@@ -230,7 +228,7 @@ screens = [
                 widget.WindowName(max_chars=50, foreground=catppuccin['peach'], fmt="     {}"),
 
                 widget.PulseVolume(
-                    fmt="奔{}",
+                    fmt=" {}",
                     mouse_callbacks={
                         "Button1": lazy.spawn("pavucontrol"),
                     },
@@ -238,14 +236,14 @@ screens = [
                 ),
                 widget.TextBox(fmt="|",padding=None,foreground=catppuccin["blue"]),
                 widget.KeyboardLayout(
-                    configured_keyboards=["us", "ca"], fmt=" {}", 
+                    configured_keyboards=["us", "ca"], fmt="  {}", 
                     foreground=catppuccin["blue"],
 
                 ),
                 widget.Spacer(length=30),
                 widget.CPU(
                     foreground=catppuccin["green"],
-                    format=" {load_percent}%",
+                    format="󰻠 {load_percent}%",
                     mouse_callbacks={
                         "Button1": lazy.spawn("alacritty --class htop -e htop"),
                     },
@@ -254,13 +252,13 @@ screens = [
                 widget.Memory(
 
                     foreground=catppuccin["green"],
-                    fmt="{}",
+                    fmt="󰍛 {}",
                     mouse_callbacks={
                         "Button1": lazy.spawn("alacritty --class htop -e htop"),
                     },
                 ),
                 widget.Spacer(length=30),
-                widget.Clock(format=" %Y-%m-%d %a %I:%M %p", foreground=catppuccin["rosewater"]),
+                widget.Clock(format=" %Y-%m-%d %a %I:%M %p", foreground=catppuccin["rosewater"]),
                 widget.Spacer(length=15),
                 widget.Spacer(length=15, background=catppuccin["surface0"]),
                 widget.Systray(background=catppuccin["surface0"]),

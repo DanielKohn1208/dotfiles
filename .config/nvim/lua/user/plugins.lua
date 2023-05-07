@@ -18,8 +18,8 @@ require("lazy").setup({
 	"mfussenegger/nvim-jdtls",
 	"jbyuki/nabla.nvim",
 	-- Packer can manage itself
-	"kyazdani42/nvim-web-devicons",
-	"kyazdani42/nvim-tree.lua",
+	"nvim-tree/nvim-web-devicons",
+	"nvim-tree/nvim-tree.lua",
 	{
 		"catppuccin/nvim",
 		as = "catppuccin",
@@ -65,7 +65,7 @@ require("lazy").setup({
 	"BurntSushi/ripgrep",
 
 	-- bufferline
-	{ "akinsho/bufferline.nvim", version = "3.*" },
+	{ "akinsho/bufferline.nvim", version = "*" },
 
 	-- status line
 	{

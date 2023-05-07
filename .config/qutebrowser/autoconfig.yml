@@ -23,8 +23,8 @@ settings:
     global: true
   content.blocking.method:
     global: both
-  content.javascript.clipboard:
-    github.com: access
+  content.mouse_lock:
+    https://krunker.io: true
   content.register_protocol_handler:
     https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: true
