@@ -25,6 +25,7 @@ alias cat="bat"
 alias vnotes="nvim ~/notes"
 alias dwmconf="cd ~/.config/suckless/dwm/dwm-6.3/"
 alias vi="nvim"
+alias hx="helix"
 
 # eval "$(starship init zsh)"
 
