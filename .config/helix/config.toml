@@ -1,11 +1,10 @@
 theme = "catppuccin_macchiato"
-
 [editor]
 line-number = "relative"
 cursorline = true
 color-modes = true
 bufferline = "always"
-
+idle-timeout=0
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
@@ -35,3 +34,5 @@ d = ":buffer-close"
 D = ":buffer-close!"
 t = "diagnostics_picker"
 T = "workspace_diagnostics_picker"
+
+

@@ -10,11 +10,12 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
 require("lazy").setup({
-
 	"onsails/lspkind.nvim",
-	"WhoIsSethDaniel/mason-tool-installer.nvim",
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		lazy = true,
+	},
 	"mfussenegger/nvim-jdtls",
 	"jbyuki/nabla.nvim",
 	-- Packer can manage itself
@@ -37,29 +38,41 @@ require("lazy").setup({
 		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
+		lazy = true,
 	},
 
-	"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
+	{
+		"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
+		lazy = true,
+	},
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"jose-elias-alvarez/null-ls.nvim",
 
 	-- cmp stuff
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	"hrsh7th/cmp-cmdline",
-	"hrsh7th/nvim-cmp",
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/nvim-cmp",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+		}
+	},
+	{
+		"rafamadriz/friendly-snippets", -- a bunch of snippets to use
+		lazy = false,
+	},
+
 	{
 		"L3MON4D3/LuaSnip",
 		version = "1.*",
 		-- install jsregexp (optional!:).
 		build = "make install_jsregexp",
 	},
-	"saadparwaiz1/cmp_luasnip",
-	"hrsh7th/cmp-nvim-lua",
-	"rafamadriz/friendly-snippets", -- a bunch of snippets to use
-
 	-- telescope
 	"nvim-telescope/telescope.nvim",
 	"BurntSushi/ripgrep",
@@ -88,11 +101,20 @@ require("lazy").setup({
 		config = function()
 			require("Comment").setup()
 		end,
+		lazy = true,
 	},
 
 	"lewis6991/gitsigns.nvim",
 }, {
 	ui = {
 		border = "rounded",
+	},
+	defaults = {
+		lazy = true
+	},
+	performance = {
+		cache = {
+			enabled = true
+		}
 	},
 })
