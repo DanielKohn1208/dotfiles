@@ -31,7 +31,10 @@ require("lazy").setup({
 
 	"nvim-lua/plenary.nvim",
 
-	"lukas-reineke/indent-blankline.nvim",
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = "BufEnter",
+	},
 
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -44,23 +47,45 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
 		lazy = true,
+		event = "InsertEnter",
+		config = function() 
+			require("lsp.null-ls")
+		end,
 	},
-	"williamboman/mason.nvim",
+	{
+		"williamboman/mason.nvim",
+	},
+
 	"williamboman/mason-lspconfig.nvim",
-	"jose-elias-alvarez/null-ls.nvim",
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		event = "BufEnter",
+		config = function()
+			require("lsp.null-ls")
+		end,
+	},
 
 	-- cmp stuff
 	{
-		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/nvim-cmp",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
-		}
+			{
+				"windwp/nvim-autopairs",
+				config = function()
+					require("user.autopairs")
+				end,
+			},
+		},
+		config = function()
+			require("user.nvim-cmp")
+		end,
 	},
 	{
 		"rafamadriz/friendly-snippets", -- a bunch of snippets to use
@@ -82,18 +107,26 @@ require("lazy").setup({
 
 	-- status line
 	{
+		event = "BufEnter",
 		"nvim-lualine/lualine.nvim",
-	},
-
-	-- handles autopairs
-	{
-		"windwp/nvim-autopairs",
 		config = function()
-			require("nvim-autopairs").setup()
+			require("user.lualine")
 		end,
 	},
 
-	{ "akinsho/toggleterm.nvim", version = "*" },
+	-- handles autopairs
+
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		lazy = true,
+		config = function()
+			require("user.toggleterm")
+		end,
+		keys = {
+			[[<C-\>]]
+		}
+	},
 
 	--handles Comments
 	{
@@ -102,6 +135,9 @@ require("lazy").setup({
 			require("Comment").setup()
 		end,
 		lazy = true,
+		keys = {
+			"gcc",
+		},
 	},
 
 	"lewis6991/gitsigns.nvim",
@@ -110,11 +146,11 @@ require("lazy").setup({
 		border = "rounded",
 	},
 	defaults = {
-		lazy = true
+		lazy = true,
 	},
 	performance = {
 		cache = {
-			enabled = true
-		}
+			enabled = true,
+		},
 	},
 })

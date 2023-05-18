@@ -134,20 +134,5 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 })
-local null_ls = require("null-ls")
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-null_ls.setup({
-	debug = false,
-	sources = {
-		formatting.autopep8.with({extra_args= {"-a"}}),
-		-- formatting.stylua,
-		formatting.google_java_format.with({extra_args = {"--aosp"}}),
-		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),
-		formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}}),
-		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
-	},
-	border = "rounded",
-	on_attach = M.on_attach,
-})
+
 return M
