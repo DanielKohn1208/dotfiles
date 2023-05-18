@@ -33,35 +33,34 @@ require("lazy").setup({
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 	},
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = function()
+		event = "VeryLazy",
+		build = function ()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
+		config = function ()
+			require("user.treesitter")
+		end,
 		lazy = true,
 	},
 
-	{
-		"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
-		lazy = true,
-		event = "InsertEnter",
-		config = function() 
-			require("lsp.null-ls")
-		end,
-	},
 	{
 		"williamboman/mason.nvim",
-	},
-
-	"williamboman/mason-lspconfig.nvim",
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		event = "BufEnter",
+		lazy = true,
+		event = "BufReadPre",
+		dependencies = {
+			{
+				"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
+				"jose-elias-alvarez/null-ls.nvim",
+				"williamboman/mason-lspconfig.nvim",
+			},
+		},
 		config = function()
-			require("lsp.null-ls")
+			require("lsp.lsp-config")
 		end,
 	},
 
@@ -107,7 +106,7 @@ require("lazy").setup({
 
 	-- status line
 	{
-		event = "BufEnter",
+		event = "VeryLazy",
 		"nvim-lualine/lualine.nvim",
 		config = function()
 			require("user.lualine")
@@ -124,8 +123,8 @@ require("lazy").setup({
 			require("user.toggleterm")
 		end,
 		keys = {
-			[[<C-\>]]
-		}
+			[[<C-\>]],
+		},
 	},
 
 	--handles Comments
