@@ -39,10 +39,10 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
-		build = function ()
+		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
-		config = function ()
+		config = function()
 			require("user.treesitter")
 		end,
 		lazy = true,
@@ -98,16 +98,31 @@ require("lazy").setup({
 		build = "make install_jsregexp",
 	},
 	-- telescope
-	"nvim-telescope/telescope.nvim",
-	"BurntSushi/ripgrep",
+	{
+		event = "VeryLazy",
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"BurntSushi/ripgrep",
+		},
+		config = function()
+			require("user.telescope")
+		end,
+	},
 
 	-- bufferline
-	{ "akinsho/bufferline.nvim", version = "*" },
+	{
+		"akinsho/bufferline.nvim",
+		lazy = false,
+		version = "*",
+		config = function ()
+			require("user.bufferline")
+		end
+	},
 
 	-- status line
 	{
-		event = "VeryLazy",
 		"nvim-lualine/lualine.nvim",
+		lazy = false,
 		config = function()
 			require("user.lualine")
 		end,
