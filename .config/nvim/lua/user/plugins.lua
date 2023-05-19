@@ -16,6 +16,14 @@ require("lazy").setup({
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		lazy = true,
 	},
+	{
+		"glepnir/dashboard-nvim",
+		event = "VimEnter",
+		config = function()
+			require("dashboard").setup({})
+		end,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	"mfussenegger/nvim-jdtls",
 	"jbyuki/nabla.nvim",
 	-- Packer can manage itself
@@ -24,6 +32,8 @@ require("lazy").setup({
 	{
 		"catppuccin/nvim",
 		as = "catppuccin",
+		lazy = false,
+		priority = 1000,
 		config = function()
 			vim.cmd([[colorscheme catppuccin-macchiato]])
 		end,
@@ -34,6 +44,18 @@ require("lazy").setup({
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "VeryLazy",
+		config = function()
+			require("indent_blankline").setup({
+				-- for example, context is off by default, use this to turn it on
+				show_current_context = true,
+				show_current_context_start = true,
+				filetype_exclude = {"dashboard"},
+				config = {
+					header = "DVIM"
+				}
+
+			})
+		end,
 	},
 
 	{
@@ -114,15 +136,16 @@ require("lazy").setup({
 		"akinsho/bufferline.nvim",
 		lazy = false,
 		version = "*",
-		config = function ()
+		config = function()
 			require("user.bufferline")
-		end
+		end,
 	},
 
 	-- status line
 	{
 		"nvim-lualine/lualine.nvim",
-		lazy = false,
+		event = "VimEnter",
+		lazy = true,
 		config = function()
 			require("user.lualine")
 		end,
