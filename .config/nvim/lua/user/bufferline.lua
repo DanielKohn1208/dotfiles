@@ -2,6 +2,8 @@ local status_ok, bufferline = pcall(require, "bufferline")
 if not status_ok then
 	return
 end
+local macchiato = require("catppuccin.palettes").get_palette("macchiato")
+
 bufferline.setup({
 	options = {
 		numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,

@@ -12,6 +12,7 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+
 local config = {
 	-- disable virtual text
 	virtual_text = false,
@@ -44,7 +45,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
+M.on_attach = function(client,bufnr)
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -63,7 +64,7 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references{}<cr>", bufopts)
 	vim.keymap.set("n", "<space>f", function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({async = true} )
 	end, bufopts)
 end
 
@@ -71,89 +72,49 @@ local lsp_flags = {
 	-- This is the default in Nvim 0.7+
 	debounce_text_changes = 150,
 }
-require("mason").setup({
-	ui = {
-		border = "rounded",
-	},
-})
-require("mason-lspconfig").setup()
-require("mason-tool-installer").setup({
-	ensure_installed = {
-		"lua-language-server",
-		"pyright",
-		"css-lsp",
-		"emmet-ls",
-		"html-lsp",
-		"typescript-language-server",
-		"autopep8",
-		-- "stylua",
-		"flake8",
-		"djlint",
-		"google-java-format",
-	},
-	run_on_start = true,
-	start_delay = 3000,
-})
-require("mason-lspconfig").setup_handlers({
-	function(server_name)
-		require("lspconfig")[server_name].setup({
-			on_attach = M.on_attach,
-		})
-	end,
-	["pyright"] = function()
-		require("lspconfig")["pyright"].setup({
-			on_attach = M.on_attach,
-			settings = {
-				python = {
-					analysis = {
-						autoSearchPaths = true,
-						typeCheckingMode = "off",
-						useLibraryCodeForTypes = true,
-					},
+
+require("lspconfig")["lua_ls"].setup({
+	on_attach = M.on_attach,
+	flags = lsp_flags,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim", "awesome", "client", "root", "screen" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
 				},
 			},
-		})
-	end,
-	["lua_ls"] = function()
-		require("lspconfig")["lua_ls"].setup({
-			on_attach = M.on_attach,
-			flags = lsp_flags,
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim", "awesome", "client", "root", "screen" },
-					},
-					workspace = {
-						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							[vim.fn.stdpath("config") .. "/lua"] = true,
-						},
-					},
-				},
-			},
-		})
-	end,
-})
-local null_ls_status_ok, null_ls = pcall(require, "null-ls")
-if not null_ls_status_ok then
-	return
-end
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-
-local source = { }
-
-null_ls.setup({
-	debug = false,
-	sources = {
-		formatting.autopep8.with({extra_args= {"-a"}}),
-		formatting.stylua,
-		formatting.google_java_format.with({extra_args = {"--aosp"}}),
-		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),
-		formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}}),
-		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
+		},
 	},
-	border = "rounded",
+})
+require("lspconfig")["cssls"].setup({
 	on_attach = M.on_attach,
 })
+require("lspconfig")["html"].setup({
+	on_attach = M.on_attach,
+})
+require("lspconfig")["tsserver"].setup({
+	on_attach = M.on_attach,
+	-- root_dir = function() return vim.loop.cwd() end      -- run lsp for javascript in any directory
+})
+require("lspconfig")["emmet_ls"].setup({
+	on_attach = M.on_attach,
+})
+
+require("lspconfig")["pyright"].setup({
+	on_attach = M.on_attach,
+	settings = {
+		python = {
+			analysis = {
+				autoSearchPaths = true,
+				typeCheckingMode = "off",
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})
+
 return M
