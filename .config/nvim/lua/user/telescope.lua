@@ -1,6 +1,10 @@
 local actions = require "telescope.actions"
 require('telescope').setup {
 	defaults = {
+		file_ignore_patterns = {
+			"node_modules",
+			"env"
+		},
 		prompt_prefix = " ",
 		selection_caret = " ",
 		path_display = { "smart" },

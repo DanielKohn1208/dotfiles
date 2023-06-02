@@ -6,6 +6,12 @@ local config = {
 	root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "build.xml" }, { upward = true })[1]),
 	settings = {
 		java = {
+			project = {
+				referencedLibraries = {
+					"/home/daniel/code/TermProject/sqlite-jdbc-3.41.2.1.jar",
+
+				},
+			},
 			configuration = {
 				runtimes = {
 

@@ -1,8 +1,3 @@
-require("mason").setup({
-	ui = {
-		border = "rounded",
-	},
-})
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua-language-server",
