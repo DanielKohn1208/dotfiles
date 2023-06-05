@@ -71,6 +71,9 @@ local lsp_flags = {
 	-- This is the default in Nvim 0.7+
 	debounce_text_changes = 150,
 }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("mason").setup({
 	ui = {
 		border = "rounded",
@@ -99,6 +102,12 @@ require("mason-lspconfig").setup_handlers({
 	function(server_name)
 		require("lspconfig")[server_name].setup({
 			on_attach = M.on_attach,
+		})
+	end,
+	["cssls"] = function()
+		require("lspconfig")["cssls"].setup({
+			on_attach = M.on_attach,
+			capabilities = capabilities,
 		})
 	end,
 	["pyright"] = function()

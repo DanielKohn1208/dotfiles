@@ -1,6 +1,6 @@
 vim.opt.backup = false -- creates a backup file
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
+vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
@@ -39,7 +39,7 @@ vim.opt.hidden = true
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
-vim.cmd([[set formatoptions-=cro]]) -- TODO: this doesn't seem to work
+vim.cmd([[set formatoptions-=ro]]) -- TODO: this doesn't seem to work
 
 --vim wiki things
 vim.cmd("set nocompatible")
@@ -48,6 +48,7 @@ vim.cmd("syntax on")
 
 vim.cmd([[
 autocmd FileType javascript call Settings()
+autocmd FileType javascriptreact call Settings()
 autocmd FileType json call Settings()
 autocmd FileType css call Settings()
 autocmd FileType html call Settings()
@@ -55,7 +56,7 @@ autocmd FileType typescript call Settings()
 autocmd FileType ts call Settings()
 autocmd FileType vue call Settings()
 autocmd FileType htmldjango call Settings()
-
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 function! Settings()
 		setlocal tabstop=2
 		setlocal shiftwidth=2

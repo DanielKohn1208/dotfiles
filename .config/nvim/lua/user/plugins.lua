@@ -11,21 +11,24 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-	"onsails/lspkind.nvim",
-
+	"mfussenegger/nvim-jdtls",
+	"jbyuki/nabla.nvim",
 	{
-		"glepnir/dashboard-nvim",
-		event = "VimEnter",
+		"iamcco/markdown-preview.nvim",
+		lazy = false,
+		build = function() vim.fn["mkdp#util#install"]() end,
+	},
+	-- Packer can manage itself
+	-- "nvim-tree/nvim-web-devicons",
+	{
+		"nvim-tree/nvim-tree.lua",
+		lazy = true,
+		event = "VeryLazy",
 		config = function()
-			require("dashboard").setup({})
+			require("user.nvimtree")
 		end,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	"mfussenegger/nvim-jdtls",
-	"jbyuki/nabla.nvim",
-	-- Packer can manage itself
-	"nvim-tree/nvim-web-devicons",
-	"nvim-tree/nvim-tree.lua",
 	{
 		"catppuccin/nvim",
 		as = "catppuccin",
@@ -36,8 +39,7 @@ require("lazy").setup({
 		end,
 	},
 
-	"nvim-lua/plenary.nvim",
-
+	-- "nvim-lua/plenary.nvim",
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "VeryLazy",
@@ -45,7 +47,7 @@ require("lazy").setup({
 			require("indent_blankline").setup({
 				-- for example, context is off by default, use this to turn it on
 				show_current_context = true,
-				show_current_context_start = true,
+				-- show_current_context_start = true,
 				filetype_exclude = { "dashboard" },
 				config = {
 					header = "DVIM"
@@ -66,17 +68,23 @@ require("lazy").setup({
 		end,
 		lazy = true,
 	},
-
 	{
-		"williamboman/mason.nvim",
-		lazy = false,
-		-- event = "BufReadPre",
+		"jose-elias-alvarez/null-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("lsp.null-ls")
+		end,
 		dependencies = {
-			{
-				"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
-				"jose-elias-alvarez/null-ls.nvim",
-				"williamboman/mason-lspconfig.nvim",
-			},
+			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig"
+		}
+	},
+	{
+		"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
 			require("lsp.lsp-config")
@@ -89,6 +97,9 @@ require("lazy").setup({
 		config = function()
 			require("lsp.mason-installer")
 		end,
+		dependencies = {
+			"williamboman/mason.nvim",
+		}
 	},
 
 
@@ -97,21 +108,23 @@ require("lazy").setup({
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
+			"onsails/lspkind.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
-			{
-				"windwp/nvim-autopairs",
-				config = function()
-					require("user.autopairs")
-				end,
-			},
+
 		},
 		config = function()
 			require("user.nvim-cmp")
+		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("user.autopairs")
 		end,
 	},
 	{
@@ -140,7 +153,7 @@ require("lazy").setup({
 	-- bufferline
 	{
 		"akinsho/bufferline.nvim",
-		lazy = false,
+		event = "VeryLazy",
 		version = "*",
 		config = function()
 			require("user.bufferline")
@@ -150,7 +163,7 @@ require("lazy").setup({
 	-- status line
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		lazy = true,
 		config = function()
 			require("user.lualine")
@@ -178,17 +191,24 @@ require("lazy").setup({
 			require("Comment").setup()
 		end,
 		lazy = true,
-		keys = {
-			"gcc",
-		},
+		event = "VeryLazy",
+
 	},
 
-	"lewis6991/gitsigns.nvim",
+	{
+		"lewis6991/gitsigns.nvim",
+		lazy = true,
+		event = "VeryLazy",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	}
 }, {
 	ui = {
 		border = "rounded",
 	},
 	defaults = {
+		event = "VeryLazy",
 		lazy = true,
 	},
 	performance = {

@@ -38,6 +38,7 @@ null_ls.setup({
 		diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),
 		formatting.djlint.with({extra_args = {"--format-js", "--indent", "2"}}),
 		null_ls.builtins.code_actions.gitsigns, -- codeactions for null ls
+		formatting.prettier
 	},
 	border = "rounded",
 	on_attach = require("lsp.lsp-config").on_attach,
