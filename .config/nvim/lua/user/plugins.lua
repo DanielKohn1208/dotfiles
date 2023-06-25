@@ -16,7 +16,9 @@ require("lazy").setup({
 	{
 		"iamcco/markdown-preview.nvim",
 		lazy = false,
+		event = "VeryLazy",
 		build = function() vim.fn["mkdp#util#install"]() end,
+
 	},
 	-- Packer can manage itself
 	-- "nvim-tree/nvim-web-devicons",
@@ -59,14 +61,14 @@ require("lazy").setup({
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
 		config = function()
 			require("user.treesitter")
 		end,
-		lazy = true,
+		lazy = false,
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -188,10 +190,14 @@ require("lazy").setup({
 	{
 		"numToStr/Comment.nvim",
 		config = function()
-			require("Comment").setup()
+			require("Comment").setup({
+				toggler = {
+					line = '<C-/>',
+				}
+			})
 		end,
-		lazy = true,
-		event = "VeryLazy",
+		lazy = false,
+		-- event = "VeryLazy",
 
 	},
 

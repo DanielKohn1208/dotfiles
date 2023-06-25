@@ -3,7 +3,6 @@ require("mason-tool-installer").setup({
 		"lua-language-server",
 		"pyright",
 		"css-lsp",
-		"emmet-ls",
 		"html-lsp",
 		"typescript-language-server",
 		"autopep8",

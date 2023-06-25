@@ -42,4 +42,5 @@ require 'nvim-treesitter.configs'.setup {
 		enable = true,
 		disable = { "yaml", "python", "html" }
 	},
+
 }
