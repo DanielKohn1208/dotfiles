@@ -51,15 +51,9 @@ def filter_yt(info: interceptor.Request):
 
 interceptor.register(filter_yt)
 
-config.bind(
-    "<Ctrl-Shift-y>",
-    "hint links spawn --detach mpv  --cache=yes {hint-url}",
-)
 
-config.bind(
-    "M",
-    "hint links spawn --detach vlc {hint-url}",
-)
+
+
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
@@ -187,18 +181,6 @@ config.set("content.images", True, "devtools://*")
 # Enable JavaScript.
 # Type: Bool
 config.set("content.javascript.enabled", True, "chrome-devtools://*")
-
-# Enable JavaScript.
-# Type: Bool
-config.set("content.javascript.enabled", True, "devtools://*")
-
-# Enable JavaScript.
-# Type: Bool
-config.set("content.javascript.enabled", True, "chrome://*/*")
-
-# Enable JavaScript.
-# Type: Bool
-config.set("content.javascript.enabled", True, "qute://*/*")
 
 # picking fileselector
 config.set("fileselect.handler", "external")
