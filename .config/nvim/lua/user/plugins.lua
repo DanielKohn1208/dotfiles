@@ -11,17 +11,25 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-	"mfussenegger/nvim-jdtls",
-	"jbyuki/nabla.nvim",
 	{
 		"iamcco/markdown-preview.nvim",
 		lazy = false,
 		event = "VeryLazy",
-		build = function() vim.fn["mkdp#util#install"]() end,
-
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
 	},
 	-- Packer can manage itself
 	-- "nvim-tree/nvim-web-devicons",
+	-- {
+	-- 	'lervag/vimtex',
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		vim.cmd([[
+	-- 		let g:vimtex_view_method = 'zathura'
+	-- 		]])
+	-- 	end,
+	-- },
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = true,
@@ -44,17 +52,13 @@ require("lazy").setup({
 	-- "nvim-lua/plenary.nvim",
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		event = "VeryLazy",
 		config = function()
-			require("indent_blankline").setup({
-				-- for example, context is off by default, use this to turn it on
-				show_current_context = true,
-				-- show_current_context_start = true,
-				filetype_exclude = { "dashboard" },
-				config = {
-					header = "DVIM"
-				}
-
+			require("ibl").setup({
+				scope = {
+					enabled = false,
+				},
 			})
 		end,
 	},
@@ -71,39 +75,28 @@ require("lazy").setup({
 		lazy = false,
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("lsp.null-ls")
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"neovim/nvim-lspconfig"
-		}
+			"neovim/nvim-lspconfig",
+		},
 	},
 	{
 		"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "VeryLazy" },
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
 			require("lsp.lsp-config")
 		end,
 	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("lsp.mason-installer")
-		end,
-		dependencies = {
-			"williamboman/mason.nvim",
-		}
-	},
-
 
 	-- cmp stuff
 	{
@@ -116,7 +109,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-path",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
-
+			"rafamadriz/friendly-snippets",
 		},
 		config = function()
 			require("user.nvim-cmp")
@@ -129,16 +122,14 @@ require("lazy").setup({
 			require("user.autopairs")
 		end,
 	},
-	{
-		"rafamadriz/friendly-snippets", -- a bunch of snippets to use
-		lazy = false,
-	},
 
 	{
 		"L3MON4D3/LuaSnip",
+		lazy = false,
 		version = "1.*",
 		-- install jsregexp (optional!:).
 		build = "make install_jsregexp",
+		config = function() end,
 	},
 	-- telescope
 	{
@@ -192,13 +183,12 @@ require("lazy").setup({
 		config = function()
 			require("Comment").setup({
 				toggler = {
-					line = '<C-/>',
-				}
+					line = "<C-/>",
+				},
 			})
 		end,
 		lazy = false,
 		-- event = "VeryLazy",
-
 	},
 
 	{
@@ -208,7 +198,7 @@ require("lazy").setup({
 		config = function()
 			require("gitsigns").setup()
 		end,
-	}
+	},
 }, {
 	ui = {
 		border = "rounded",

@@ -48,6 +48,7 @@ vim.cmd("syntax on")
 
 vim.cmd([[
 autocmd FileType javascript call Settings()
+autocmd FileType svelte call Settings()
 autocmd FileType javascriptreact call Settings()
 autocmd FileType json call Settings()
 autocmd FileType css call Settings()

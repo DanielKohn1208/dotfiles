@@ -52,7 +52,7 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set("n", "gi", "<cmd>lua require'telescope.builtin'.lsp_implementations{}<cr>", bufopts)
-	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+	vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
 	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
 	vim.keymap.set("n", "<space>wl", function()
@@ -85,7 +85,7 @@ require("mason-tool-installer").setup({
 		"lua-language-server",
 		"pyright",
 		"css-lsp",
-		"emmet-ls",
+		-- "emmet-ls",
 		"html-lsp",
 		"typescript-language-server",
 		"autopep8",
@@ -93,6 +93,7 @@ require("mason-tool-installer").setup({
 		"flake8",
 		"djlint",
 		"google-java-format",
+		"svelte-language-server",
 	},
 	run_on_start = true,
 	start_delay = 3000,
@@ -102,22 +103,31 @@ require("mason-lspconfig").setup_handlers({
 	function(server_name)
 		require("lspconfig")[server_name].setup({
 			on_attach = M.on_attach,
+			flags = lsp_flags,
+			capabilities = capabilities,
 		})
 	end,
 	["cssls"] = function()
 		require("lspconfig")["cssls"].setup({
 			on_attach = M.on_attach,
+			flags = lsp_flags,
 			capabilities = capabilities,
 		})
 	end,
 	["pyright"] = function()
 		require("lspconfig")["pyright"].setup({
 			on_attach = M.on_attach,
+			flags = lsp_flags,
+			capabilities = capabilities,
 			settings = {
+				pyright = {
+					disableOrganizeImports = false
+				},
 				python = {
 					analysis = {
+						autoImportCompletion = true,
 						autoSearchPaths = true,
-						typeCheckingMode = "off",
+						typeCheckingMode = "off", -- might use off here in the future
 						useLibraryCodeForTypes = true,
 					},
 				},
@@ -128,6 +138,7 @@ require("mason-lspconfig").setup_handlers({
 		require("lspconfig")["lua_ls"].setup({
 			on_attach = M.on_attach,
 			flags = lsp_flags,
+			capabilities = capabilities,
 			settings = {
 				Lua = {
 					diagnostics = {
