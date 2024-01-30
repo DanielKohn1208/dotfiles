@@ -12,34 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{
-		"iamcco/markdown-preview.nvim",
-		lazy = false,
-		event = "VeryLazy",
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-	},
-	-- Packer can manage itself
-	-- "nvim-tree/nvim-web-devicons",
-	-- {
-	-- 	'lervag/vimtex',
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		vim.cmd([[
-	-- 		let g:vimtex_view_method = 'zathura'
-	-- 		]])
-	-- 	end,
-	-- },
-	{
-		"nvim-tree/nvim-tree.lua",
-		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("user.nvimtree")
-		end,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
-	{
 		"catppuccin/nvim",
 		as = "catppuccin",
 		lazy = false,
@@ -48,7 +20,18 @@ require("lazy").setup({
 			vim.cmd([[colorscheme catppuccin-macchiato]])
 		end,
 	},
-
+	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = false,
+	},
+	{
+		"echasnovski/mini.nvim",
+		config = function()
+			require("user.mini")
+		end,
+		version = "*",
+		lazy = false,
+	},
 	-- "nvim-lua/plenary.nvim",
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -115,13 +98,6 @@ require("lazy").setup({
 			require("user.nvim-cmp")
 		end,
 	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			require("user.autopairs")
-		end,
-	},
 
 	{
 		"L3MON4D3/LuaSnip",
@@ -144,16 +120,15 @@ require("lazy").setup({
 	},
 
 	-- bufferline
-	{
-		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
-		version = "*",
-		config = function()
-			require("user.bufferline")
-		end,
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	event = "VeryLazy",
+	-- 	version = "*",
+	-- 	config = function()
+	-- 		require("user.bufferline")
+	-- 	end,
+	-- },
 
-	-- status line
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
@@ -175,20 +150,6 @@ require("lazy").setup({
 		keys = {
 			[[<C-\>]],
 		},
-	},
-
-	--handles Comments
-	{
-		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup({
-				toggler = {
-					line = "<C-/>",
-				},
-			})
-		end,
-		lazy = false,
-		-- event = "VeryLazy",
 	},
 
 	{

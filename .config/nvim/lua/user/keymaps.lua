@@ -52,7 +52,6 @@ keymap(
 )
 keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
 
-
 keymap(
 	"i",
 	"<c-p>",
@@ -60,7 +59,6 @@ keymap(
 	opts
 )
 keymap("i", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
-
 
 -- Terminal --
 -- Better terminal navigation
@@ -70,7 +68,7 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- nvim tree stuff
-keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+keymap("n", "<leader>e", ":lua MiniFiles.open()<Cr>", opts)
 
 --trouble toggle stuff
 keymap("n", "<leader>t", "<cmd>lua require'telescope.builtin'.diagnostics{}<cr>", opts)
@@ -79,5 +77,3 @@ keymap("n", "<leader>t", "<cmd>lua require'telescope.builtin'.diagnostics{}<cr>"
 keymap("n", "<leader>p", "<cmd>lua require('nabla').popup({border='rounded'})<CR>", opts)
 keymap("n", "<leader>ce", "<cmd>lua require('nabla').enable_virt({align_center=true})<CR>", opts)
 keymap("n", "<leader>cd", "<cmd>lua require('nabla').disable_virt()<CR>", opts)
-
-
