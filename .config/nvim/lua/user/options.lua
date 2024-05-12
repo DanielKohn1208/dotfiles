@@ -21,7 +21,7 @@ vim.opt.timeoutlen = 1000 -- time to wait for a mapped sequence to complete (in 
 vim.opt.undofile = true -- enable persistent undo
 vim.opt.updatetime = 300 -- faster completion (4000ms default)
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.expandtab = false -- convert tabs to spaces
+vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 4 -- insert 4 spaces for a tab
 vim.opt.softtabstop = 4 -- insert 4 spaces for a tab
@@ -50,12 +50,14 @@ vim.cmd([[
 autocmd FileType javascript call Settings()
 autocmd FileType svelte call Settings()
 autocmd FileType javascriptreact call Settings()
+autocmd FileType typescriptreact call Settings()
 autocmd FileType json call Settings()
 autocmd FileType css call Settings()
 autocmd FileType html call Settings()
 autocmd FileType typescript call Settings()
 autocmd FileType ts call Settings()
 autocmd FileType vue call Settings()
+autocmd FileType java call Settings()
 autocmd FileType htmldjango call Settings()
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 function! Settings()

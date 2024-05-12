@@ -10,7 +10,7 @@ local source = { }
 null_ls.setup({
 	debug = false,
 	sources = {
-		formatting.autopep8.with({extra_args= {"-a"}}),
+		-- formatting.autopep8.with({extra_args= {"-a"}}),
 		formatting.stylua,
 		formatting.google_java_format.with({extra_args = {"--aosp"}}),
 		-- diagnostics.flake8.with({ extra_args = {"--max-line-length", "100"} }),

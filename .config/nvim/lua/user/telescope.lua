@@ -3,6 +3,7 @@ require('telescope').setup {
 	defaults = {
 		file_ignore_patterns = {
 			"node_modules",
+			"topics-and-qrels",
 			"env"
 		},
 		prompt_prefix = " ",
