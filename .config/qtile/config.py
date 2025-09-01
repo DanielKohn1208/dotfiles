@@ -24,34 +24,34 @@ mod = "mod4"
 terminal = "kitty -1"
 webbrowser = "qutebrowser"
 catppuccin = {
-    "rosewater" : "#F4DBD6",
-	"lamingo" : "#F0C6C6",
-	'pink' : "#F5BDE6",
-	'mauve' : "#C6A0F6",
-	'red' : "#ED8796",
-	'maroon' : "#EE99A0",
-	'peach' : "#F5A97F",
-	'yellow' : "#EED49F",
-	'green' : "#A6DA95",
-	'teal' : "#8BD5CA",
-	'sky' : "#91D7E3",
-	'sapphire' : "#7DC4E4",
-	'blue' : "#8AADF4",
-	'lavender' : "#B7BDF8",
+    "rosewater": "#F4DBD6",
+    "lamingo": "#F0C6C6",
+    'pink': "#F5BDE6",
+    'mauve': "#C6A0F6",
+    'red': "#ED8796",
+    'maroon': "#EE99A0",
+    'peach': "#F5A97F",
+    'yellow': "#EED49F",
+    'green': "#A6DA95",
+    'teal': "#8BD5CA",
+    'sky': "#91D7E3",
+    'sapphire': "#7DC4E4",
+    'blue': "#8AADF4",
+    'lavender': "#B7BDF8",
 
-	'text' : "#CAD3F5",
-	'subtext1' : "#B8C0E0",
-	'subtext0' : "#A5ADCB",
-	'overlay2' : "#939AB7",
-	'overlay1' : "#8087A2",
-	'overlay0' : "#6E738D",
-	'surface2' : "#5B6078",
-	'surface1' : "#494D64",
-	'surface0' : "#363A4F",
+    'text': "#CAD3F5",
+    'subtext1': "#B8C0E0",
+    'subtext0': "#A5ADCB",
+    'overlay2': "#939AB7",
+    'overlay1': "#8087A2",
+    'overlay0': "#6E738D",
+    'surface2': "#5B6078",
+    'surface1': "#494D64",
+    'surface0': "#363A4F",
 
-	'base' : "#24273A",
-	'mantle' : "#1E2030",
-	'crust' : "#181926",
+    'base': "#24273A",
+    'mantle': "#1E2030",
+    'crust': "#181926",
 }
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -105,7 +105,7 @@ keys = [
         lazy.window.toggle_floating(),
         desc="toggle between floating and non floating",
     ),
-    Key([mod], "d", lazy.spawn("rofi -show drun")),
+    Key([mod], "d", lazy.spawn("rofi -monitor -1 -show drun")),
     Key([mod], "g", lazy.spawn("i3lock")),
     # Key([mod], "d", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # Sound
@@ -117,16 +117,22 @@ keys = [
 ]
 
 # groups = [Group(i) for i in "123456789"]
-groups=[
-    Group("󰖟",matches=[Match(wm_class=[])]),
+groups = [
+    Group("󰖟", matches=[Match(wm_class=[])]),
     Group("", matches=[Match(wm_class=["dev"])]),
-    Group("󰙯",matches=[Match(wm_class=["discord"])]),
-    Group("",matches=[Match(wm_class=["obsidian", "signin-googleaccounts-nativefier-e89b69"])]),
-    Group("",matches=[Match(wm_class=["spotify"])]),
-    Group(" ",matches=[Match(wm_class=[])]),
+    Group("󰙯", matches=[Match(wm_class=["discord"])]),
+    Group(
+        "",
+        matches=[
+            Match(
+                wm_class=[
+                    "obsidian",
+                    "signin-googleaccounts-nativefier-e89b69"])]),
+    Group("", matches=[Match(wm_class=["spotify"])]),
+    Group(" ", matches=[Match(wm_class=[])]),
 ]
 
-for k, group in zip(["1","2","3","4","5","6"], groups):
+for k, group in zip(["1", "2", "3", "4", "5", "6"], groups):
     keys.extend(
         [
             # mod1 + letter of group = switch to group
@@ -136,7 +142,8 @@ for k, group in zip(["1","2","3","4","5","6"], groups):
                 lazy.group[group.name].toscreen(),
                 desc="Switch to group {}".format(group.name),
             ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
+            # mod1 + shift + letter of group = switch to & move focused window
+            # to group
             Key(
                 [mod, "shift"],
                 k,
@@ -154,10 +161,6 @@ for k, group in zip(["1","2","3","4","5","6"], groups):
                 "i",
                 lazy.screen.prev_group(),
             ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + letter of group = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
         ]
     )
 
@@ -172,7 +175,7 @@ layouts = [
     layout.MonadTall(
         border_focus=catppuccin["mauve"],
         border_normal=catppuccin["base"],
-        border_width=3,
+        border_width=4,
         margin=10,
         border_on_single=True,
     ),
@@ -210,6 +213,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+
 screens = [
     Screen(
         top=bar.Bar(
@@ -225,7 +229,10 @@ screens = [
                     background=catppuccin["surface0"]
                 ),
 
-                widget.WindowName(max_chars=50, foreground=catppuccin['peach'], fmt="     {}"),
+                widget.WindowName(
+                    max_chars=50,
+                    foreground=catppuccin['peach'],
+                    fmt="     {}"),
 
                 widget.PulseVolume(
                     fmt=" {}",
@@ -234,9 +241,12 @@ screens = [
                     },
                     foreground=catppuccin["blue"],
                 ),
-                widget.TextBox(fmt="|",padding=None,foreground=catppuccin["blue"]),
+                widget.TextBox(
+                    fmt="|",
+                    padding=None,
+                    foreground=catppuccin["blue"]),
                 widget.KeyboardLayout(
-                    configured_keyboards=["us", "ca"], fmt="  {}", 
+                    configured_keyboards=["us", "ca"], fmt="  {}",
                     foreground=catppuccin["blue"],
 
                 ),
@@ -248,7 +258,10 @@ screens = [
                         "Button1": lazy.spawn("alacritty --class htop -e htop"),
                     },
                 ),
-                widget.TextBox(fmt="|",padding=None,foreground=catppuccin["green"]),
+                widget.TextBox(
+                    fmt="|",
+                    padding=None,
+                    foreground=catppuccin["green"]),
                 widget.Memory(
 
                     foreground=catppuccin["green"],
@@ -258,16 +271,87 @@ screens = [
                     },
                 ),
                 widget.Spacer(length=30),
-                widget.Clock(format=" %Y-%m-%d %a %I:%M %p", foreground=catppuccin["rosewater"]),
+                widget.Clock(
+                    format=" %Y-%m-%d %a %I:%M %p",
+                    foreground=catppuccin["rosewater"]),
                 widget.Spacer(length=15),
                 widget.Spacer(length=15, background=catppuccin["surface0"]),
                 widget.Systray(background=catppuccin["surface0"]),
-                widget.Spacer(length=30,background=catppuccin["surface0"]),
+                widget.Spacer(length=30, background=catppuccin["surface0"]),
             ],
             size=40,
             background=catppuccin["base"],
             opacity=1,
-        ),
+        )
+    ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(
+                    inactive=catppuccin["overlay1"],
+                    active=catppuccin["rosewater"],
+                    highlight_method="text",
+                    highlight_color=catppuccin["rosewater"],
+                    padding_x=13,
+                    fontsize=16,
+                    this_current_screen_border=catppuccin["peach"],
+                    background=catppuccin["surface0"]
+                ),
+
+                widget.WindowName(
+                    max_chars=50,
+                    foreground=catppuccin['peach'],
+                    fmt="     {}"),
+
+                widget.PulseVolume(
+                    fmt=" {}",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("pavucontrol"),
+                    },
+                    foreground=catppuccin["blue"],
+                ),
+                widget.TextBox(
+                    fmt="|",
+                    padding=None,
+                    foreground=catppuccin["blue"]),
+                widget.KeyboardLayout(
+                    configured_keyboards=["us", "ca"], fmt="  {}",
+                    foreground=catppuccin["blue"],
+
+                ),
+                widget.Spacer(length=30),
+                widget.CPU(
+                    foreground=catppuccin["green"],
+                    format="󰻠 {load_percent}%",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("alacritty --class htop -e htop"),
+                    },
+                ),
+                widget.TextBox(
+                    fmt="|",
+                    padding=None,
+                    foreground=catppuccin["green"]),
+                widget.Memory(
+
+                    foreground=catppuccin["green"],
+                    fmt="󰍛 {}",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("alacritty --class htop -e htop"),
+                    },
+                ),
+                widget.Spacer(length=30),
+                widget.Clock(
+                    format=" %Y-%m-%d %a %I:%M %p",
+                    foreground=catppuccin["rosewater"]),
+                widget.Spacer(length=15),
+                # widget.Spacer(length=15, background=catppuccin["surface0"]),
+                # widget.Systray(background=catppuccin["surface0"]),
+                # widget.Spacer(length=30, background=catppuccin["surface0"]),
+            ],
+            size=40,
+            background=catppuccin["base"],
+            opacity=1,
+        )
     ),
 ]
 
@@ -293,7 +377,8 @@ cursor_warp = False
 
 floating_layout = layout.Floating(
     float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
+        # Run the utility of `xprop` to see the wm class and name of an X
+        # client.
         *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
@@ -334,6 +419,8 @@ wmname = "LG3D"
 def autostart():
     home = os.path.expanduser("~/.config/qtile/autostart.sh")
     subprocess.run([home])
+
+
 @hook.subscribe.restart
 def restart():
     lazy.hide_show_bar("top")

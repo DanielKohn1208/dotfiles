@@ -37,8 +37,8 @@ vim.opt.shortmess:append("c")
 vim.opt.wrap = true
 vim.opt.hidden = true
 
-vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
+vim.cmd("set whichwrap+=<,>,h,l,[,]")
 vim.cmd([[set formatoptions-=ro]]) -- TODO: this doesn't seem to work
 
 --vim wiki things
@@ -56,6 +56,7 @@ autocmd FileType css call Settings()
 autocmd FileType html call Settings()
 autocmd FileType typescript call Settings()
 autocmd FileType c call Settings()
+autocmd FileType cpp call Settings()
 autocmd FileType ts call Settings()
 autocmd FileType vue call Settings()
 autocmd FileType java call Settings()
@@ -67,6 +68,4 @@ function! Settings()
 		setlocal softtabstop=2
 endfunction
 
-map <C-i> <Nop>
-map <C-o> <Nop>
 ]])

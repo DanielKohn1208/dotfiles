@@ -43,22 +43,9 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
-keymap(
-	"n",
-	"<c-p>",
-	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<cr>",
-	opts
-)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
-
-keymap(
-	"i",
-	"<c-p>",
-	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false}))<cr>",
-	opts
-)
-keymap("i", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<c-p>","<cmd>Pick files<cr>" ,opts)
+keymap("n", "<c-f>", "<cmd>Pick live_grep<cr>", opts)
+keymap("n", "<c-r><c-r>", "<cmd>Pick resume<cr>", opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -70,7 +57,3 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 --trouble toggle stuff
 keymap("n", "<leader>t", "<cmd>lua require'telescope.builtin'.diagnostics{}<cr>", opts)
 
--- Markdown
-keymap("n", "<leader>p", "<cmd>lua require('nabla').popup({border='rounded'})<CR>", opts)
-keymap("n", "<leader>ce", "<cmd>lua require('nabla').enable_virt({align_center=true})<CR>", opts)
-keymap("n", "<leader>cd", "<cmd>lua require('nabla').disable_virt()<CR>", opts)
