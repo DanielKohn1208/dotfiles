@@ -91,7 +91,7 @@ require("lazy").setup({
 		end,
 	},
 
-	-- cmp stuff
+	-- -- cmp stuff
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
@@ -117,28 +117,6 @@ require("lazy").setup({
 		build = "make install_jsregexp",
 		config = function() end,
 	},
-	-- telescope
-	{
-		event = "VeryLazy",
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"BurntSushi/ripgrep",
-		},
-		config = function()
-			require("user.telescope")
-		end,
-	},
-
-	-- bufferline
-	-- {
-	-- 	"akinsho/bufferline.nvim",
-	-- 	event = "VeryLazy",
-	-- 	version = "*",
-	-- 	config = function()
-	-- 		require("user.bufferline")
-	-- 	end,
-	-- },
-
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",

@@ -44,8 +44,8 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 keymap("n", "<c-p>","<cmd>Pick files<cr>" ,opts)
-keymap("n", "<c-f>", "<cmd>Pick live_grep<cr>", opts)
-keymap("n", "<c-r><c-r>", "<cmd>Pick resume<cr>", opts)
+keymap("n", "<c-f>", "<cmd>Pick grep<cr>", opts)
+keymap("n", "<leader>r", "<cmd>Pick resume<cr>", opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -53,7 +53,4 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
---trouble toggle stuff
-keymap("n", "<leader>t", "<cmd>lua require'telescope.builtin'.diagnostics{}<cr>", opts)
 

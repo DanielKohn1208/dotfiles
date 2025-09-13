@@ -31,31 +31,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 vim.diagnostic.config(config)
-
--- LSP Confiruation
-M.on_attach = function(client, bufnr)
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", "<cmd>lua require'telescope.builtin'.lsp_implementations{}<cr>", bufopts)
-	vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-	vim.keymap.set("n", "<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, bufopts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references{}<cr>", bufopts)
-	vim.keymap.set("n", "<space>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, bufopts)
-end
-
 -- 
 
 -- Keymaps
@@ -83,7 +58,7 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", "<cmd>lua require'telescope.builtin'.lsp_implementations{}<cr>", bufopts)
+	vim.keymap.set("n", "gi", "<cmd>Pick lsp scope='implementations'<cr>", bufopts)
 	vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
 	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -93,7 +68,7 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references{}<cr>", bufopts)
+	vim.keymap.set("n", "gr", "<cmd>Pick lsp scope='references'<cr>", bufopts)
 	vim.keymap.set("n", "<space>f", function()
 		vim.lsp.buf.format({ async = true })
 	end, bufopts)
@@ -101,15 +76,15 @@ end
 
 -- Specific LSPs
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 vim.lsp.config('*', {
 	on_attach = M.on_attach,
-	flags = lsp_flags,
 	capabilities = capabilities
 })
 
 vim.lsp.config("lua_ls", {
 	on_attach = M.on_attach,
-	flags = lsp_flags,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -128,7 +103,6 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.config("pyright", {
 	on_attach = M.on_attach,
-	flags = lsp_flags,
 	capabilities = capabilities,
 	settings = {
 		pyright = {
